@@ -18,11 +18,11 @@ public class Course {
   private String description;
   @Column(name = "skill")
   private String skill;
-  @Column(name = "startDate")
+  @Column(name = "start_date")
   private Date startDate;
-  @Column(name = "endDate")
+  @Column(name = "end_date")
   private Date endDate;
-  @Column(name = "mentorName")
+  @Column(name = "mentor_name")
   private String mentorName;
   @Column(name = "progress")
   private Integer progress;
@@ -30,6 +30,6 @@ public class Course {
   private Float fee;
   @Column(name = "status")
   private String status;
-  @Column(name = "userName")
+  @Column(name = "user_name")
   private String userName;
 }
