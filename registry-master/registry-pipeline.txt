@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    environment {
+      
+	    GIT_URL = "git@github.ibm.com:sba/registry.git"
+		GIT_CRED = "48946d03-31f8-4cee-a4ed-c138e7b900a0"
+		DOCKER_REPO="registry.cn-beijing.aliyuncs.com/yuanbing/sba-registry"
+		DOCKER_REG="https://registry.cn-beijing.aliyuncs.com/yuanbing/"
+		DOCKER_REG_KEY = "874c3949-6135-41d1-902c-ebd184193ded"
+		dockerImage = ''
+      
+    }
+    stages {
+    
+    	stage('CheckOut code'){
+         	steps{
+            	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ${GIT_CRED}, url: ${GIT_URL}]]])
+            	}
+              }
+              }
+  
+
+}

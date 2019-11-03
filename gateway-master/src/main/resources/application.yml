@@ -1,0 +1,171 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  application:
+    name: sba-gateway
+server:
+  port: 9000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+  instance:
+    securePortEnabled: true
+    instance-id: ${spring.application.name}:${server.port}
+    
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+# 网关配置
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false # 停用超时设置
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000 
+    
+swagger.enabled: true
+
+
+apiurl:
+  gatewayurl: http://localhost:9000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:        
+    sba-account:
+      path: /account/**
+#        url: http://localhost:9997
+      serviceId: sba-account
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-auth:
+      path: /auth/**
+#        url: http://localhost:9999
+      serviceId: sba-auth
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers
+    sba-course:
+      path: /course/**
+#        url: http://localhost:9996
+      serviceId: sba-course
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-payment:
+      path: /payment/**
+#        url: http://localhost:9995
+      serviceId: sba-payment
+      stripPrefix: false
+      sensitiveHeaders:
+      
+
+
+---
+spring:
+  profiles: k8s
+  application:
+    name: sba-gateway
+server:
+  port: 9000
+  
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://sba-registry:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+# 网关配置
+  
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false # 停用超时设置
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000
+    
+swagger.enabled: true
+
+apiurl:
+  gatewayurl: http://sba-gateway:9000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    sba-account:
+      path: /account/**
+#        url: http://sba-account:9997
+      serviceId: sba-account
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-auth:
+      path: /auth/**
+#        url: http://sba-auth:9999
+      serviceId: sba-auth
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers 
+    sba-course:
+      path: /course/**
+#        url: http://localhost:9996
+      serviceId: sba-course
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-payment:
+      path: /payment/**
+#        url: http://localhost:9995
+      serviceId: sba-payment
+      stripPrefix: false
+      sensitiveHeaders:
+       
+        

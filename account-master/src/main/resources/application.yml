@@ -1,0 +1,82 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  application:
+    name: sba-account
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:32001/sba_account?useSSL=true
+    username: root
+    password: 123456
+spring.jpa:
+  show-sql: true
+  hibernate.ddl-auto: update
+server:
+  servlet:
+    context-path: /account
+  port: 9997
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+#        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+swagger.enabled: true
+  
+---
+spring:
+  profiles: k8s
+  application:
+    name: sba-account
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://sba-account-db:3306/sba_account?useSSL=true&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+server:
+  servlet:
+    context-path: /account
+  port: 9997
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://sba-registry:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+#        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+swagger.enabled: true
+

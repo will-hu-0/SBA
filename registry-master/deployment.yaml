@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sba-registry
+  namespace: sba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sba-registry
+  template:
+    metadata:
+      labels:
+        app: sba-registry
+    spec:
+      containers:
+        - name: sit-bmw-model
+          image: registry.cn-shanghai.aliyuncs.com/yuanbing/sba-registry:{version}
+          ports:
+            - name: http-port
+              containerPort: 10001
+          env:
+            - name: spring_profiles_active
+              value: k8s
+      imagePullSecrets:
+        - name: sba

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sba-auth
+  namespace: sba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sba-auth
+  template:
+    metadata:
+      labels:
+        app: sba-auth
+    spec:
+      containers:
+        - name: sba-auth
+          image: registry.cn-shanghai.aliyuncs.com/yuanbing/sba-auth:{version}
+          ports:
+            - name: http-port
+              containerPort: 9996
+          env:
+            - name: spring_profiles_active
+              value: k8s
+      imagePullSecrets:
+        - name: sba

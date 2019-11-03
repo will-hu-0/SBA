@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sba-gateway
+  namespace: sba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sba-gateway
+  template:
+    metadata:
+      labels:
+        app: sba-gateway
+    spec:
+      containers:
+        - name: sba-gateway
+          image: registry.cn-shanghai.aliyuncs.com/yuanbing/sba-gateway:{version}
+          ports:
+            - name: http-port
+              containerPort: 9000
+          env:
+            - name: spring_profiles_active
+              value: k8s
+      imagePullSecrets:
+        - name: sba

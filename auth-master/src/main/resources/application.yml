@@ -1,0 +1,70 @@
+
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  application:
+    name: sba-auth
+server:
+  servlet:
+    context-path: /auth
+  port: 9999
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+#        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+swagger.enabled: true
+  
+---
+spring:
+  profiles: k8s
+  application:
+    name: sba-auth
+server:
+  servlet:
+    context-path: /auth
+  port: 9999
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://sba-registry:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+#        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+swagger.enabled: true
+
