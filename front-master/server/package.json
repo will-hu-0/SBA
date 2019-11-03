@@ -1,0 +1,14 @@
+{
+  "name": "front-server",
+  "version": "1.0.0",
+  "description": "the front web server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "yuanbing@cn.ibm.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>Create Course</h2>
+
+
+<mat-dialog-content [formGroup]="form">
+
+    <mat-grid-list cols="2" rowHeight="60px">
+
+
+            <input formControlName="mentorName" type="hidden">
+        <mat-grid-tile>
+    <mat-form-field style="width: 205px;">
+
+        <input matInput
+                placeholder="Course Name"
+               formControlName="name">
+
+    </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+    <mat-form-field style="width: 205px;">
+
+        <input matInput
+        placeholder="Skill"
+       formControlName="skill">
+
+    </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+    <mat-form-field>
+
+        <input matInput [matDatepicker]="startDatepicker" placeholder="Start Time"
+            formControlName="startAt">
+
+        <mat-datepicker-toggle matSuffix
+                               [for]="startDatepicker">
+
+        </mat-datepicker-toggle>
+
+        <mat-datepicker #startDatepicker></mat-datepicker>
+
+    </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+    <mat-form-field>
+
+        <input matInput [matDatepicker]="endDatepicker" placeholder="End Time"
+            formControlName="endAt">
+
+        <mat-datepicker-toggle matSuffix
+                               [for]="endDatepicker">
+
+        </mat-datepicker-toggle>
+
+        <mat-datepicker #endDatepicker></mat-datepicker>
+
+    </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+    <mat-form-field style="width: 205px;">
+
+        <input matInput
+        placeholder="Fee"
+       formControlName="fee">
+
+    </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+    <mat-form-field style="width: 205px;">
+
+        <input matInput placeholder="Description"
+            formControlName="description">
+
+    </mat-form-field>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+    <button mat-button mat-dialog-close
+            (click)="close()">
+        Cancel
+    </button>
+
+    <button [disabled]="loading" [disabled]="!form.valid" mat-button cdkFocusInitial
+            (click)="save()">
+        Save
+    </button>
+
+</mat-dialog-actions>

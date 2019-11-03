@@ -1,0 +1,35 @@
+.main {
+  width: 95%;
+  margin: auto;
+}
+
+.spinner {
+  margin: auto;
+  margin-top: 200px;
+}
+.course-card {
+  width: 100%;
+  /* height: 200px; */
+  margin: 20px 10px;
+}
+
+.course-actions {
+  text-align: right;
+  margin-right: 10px;
+}
+.label {
+  color: blueviolet;
+  margin-right: 10px;
+}
+
+.text-inside-grid {
+  position: absolute;
+  left: 5px;
+}
+.mat-header-spacer {
+  flex: 1 1 auto;
+}
+
+.action-spacer {
+  flex: 1 1 auto;
+}

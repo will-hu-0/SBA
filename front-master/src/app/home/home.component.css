@@ -1,0 +1,28 @@
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+.toolbar-button-row button,
+.toolbar-button-row a {
+  margin-right: 8px;
+}
+.toolbar-search {
+  width: 150px;
+  margin-left: 15px;
+  font-size: 15px;
+}
+
+.toolbar-search mat-form-field {
+  margin-right: 15px;
+}
+.user-name {
+  font-size: larger;
+  margin-right: 10px;
+}
+
+.toolbar-mentor {
+  margin-left: 15px;
+}
+
+.mat-toolbar-icon {
+  margin-top: auto;
+}

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sba-front
+  namespace: sba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sba-front
+  template:
+    metadata:
+      labels:
+        app: sba-front
+    spec:
+      containers:
+        - name: sba-front
+          image: registry.cn-shanghai.aliyuncs.com/yuanbing/sba-front:{version}
+          ports:
+            - name: http-port
+              containerPort: 8080
+          env:
+            - name: spring_profiles_active
+              value: k8s
+      imagePullSecrets:
+        - name: sba
