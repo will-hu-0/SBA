@@ -12,6 +12,9 @@ spring:
     url: jdbc:mysql://localhost:32002/sba_course?useSSL=true
     username: root
     password: 123456
+spring.jpa:
+  show-sql: true
+  hibernate.ddl-auto: update
 server:
   servlet:
     context-path: /course

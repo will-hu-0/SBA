@@ -2,15 +2,14 @@ package com.sba.payment.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="payment")
 @Data
 public class Payment {
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	private Integer courseId;
 	private String userName;
