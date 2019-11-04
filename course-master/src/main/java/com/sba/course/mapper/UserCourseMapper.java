@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 @Mapper
 public interface UserCourseMapper {
 
-	@Select("SELECT id,skill,name,description,startDate,endDate,mentorName,progress FROM sba_course.course where progress=#{progress} and userName=#{username}")
+	@Select("SELECT id,skill,name,description,start_date as startDate," +
+					"end_date as endDate,mentor_name as mentorName,progress, fee " +
+					"FROM sba_course.course where progress=#{progress} and user_name=#{username}")
 	List<UserCourse> findUserCourse(@Param("username") String username, @Param("progress") Integer progress);
+
 }
