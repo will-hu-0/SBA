@@ -1,8 +1,8 @@
 <mat-sidenav-container class="login-side-container">
   <mat-sidenav mode="side" opened class="login-sidenav">
       <div class="side-container">
-        <h2 class="logo"><mat-icon style="font-size: large;">supervised_user_circle</mat-icon>Find your Mentors</h2>
-    <p><strong>Find your Mentors</strong> is an online mentorship platform, enjoy your days</p>
+        <h2 class="logo"><mat-icon style="font-size: large;">supervised_user_circle</mat-icon>Mentor On Demand</h2>
+    <p><strong>Mentor On Demand</strong> is an online mentorship platform under the FullStack Technical. This means you can find a mentor to start your full stack journey.</p>
     </div>
   </mat-sidenav>
 
@@ -10,7 +10,7 @@
       <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="login(loginForm.value)" fxLayout="column wrap"
       fxLayoutAlign="center center" fxLayoutGap="10px">
       <div class="login-main-container">
-          <h2>Log in Find your Mentors</h2>
+          <h2>Log in Mentor On Demand</h2>
           <mat-form-field>
               <input matInput placeholder="Enter your email" formControlName="email" id="email" required>
               <mat-error *ngIf="hasError('email', 'required')">You must enter a email</mat-error>

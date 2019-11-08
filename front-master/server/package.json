@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js"
   },
+  "author": "yuanbing@cn.ibm.com",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"

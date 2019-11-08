@@ -30,8 +30,7 @@
     <mat-grid-tile>
     <mat-form-field>
 
-        <input matInput [matDatepicker]="startDatepicker" placeholder="Start Time"
-            formControlName="startAt">
+        <input matInput [min]="minDate" [matDatepicker]="startDatepicker" placeholder="Start Time" formControlName="startAt">
 
         <mat-datepicker-toggle matSuffix
                                [for]="startDatepicker">
@@ -45,8 +44,7 @@
     <mat-grid-tile>
     <mat-form-field>
 
-        <input matInput [matDatepicker]="endDatepicker" placeholder="End Time"
-            formControlName="endAt">
+        <input matInput [min]="minDate" [matDatepicker]="endDatepicker" placeholder="End Time" formControlName="endAt">
 
         <mat-datepicker-toggle matSuffix
                                [for]="endDatepicker">

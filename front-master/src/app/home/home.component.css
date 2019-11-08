@@ -22,6 +22,10 @@
 .toolbar-mentor {
   margin-left: 15px;
 }
+.toolbar-notification {
+  margin-right: 15px;
+  margin-top: 10px;
+}
 
 .mat-toolbar-icon {
   margin-top: auto;

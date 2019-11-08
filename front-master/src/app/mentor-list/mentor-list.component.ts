@@ -30,6 +30,11 @@ export class MentorListComponent implements OnInit {
         // tslint:disable-next-line:no-string-literal
         this.courses = courses['data'];
         this.showCourse = false;
+      } else if (courses['code'] === 404) {
+        // tslint:disable-next-line:no-string-literal
+        this.showCourse = false;
+        // tslint:disable-next-line:no-string-literal
+        this.alertService.warn(courses['message']);
       }
     },
     error => {

@@ -23,18 +23,21 @@ export class AlertComponent implements OnInit, OnDestroy {
                         // message.cssClass = 'alert alert-success';
                         this.snackBar.open(message.text, 'close', {
                           duration: 2000,
+                          panelClass: ['success-snackbar']
                         });
                         break;
                     case 'warn':
                           // message.cssClass = 'alert alert-danger';
                           this.snackBar.open(message.text, 'close', {
                             duration: 2000,
+                            panelClass: ['warn-snackbar']
                           });
                           break;
                     case 'error':
                         // message.cssClass = 'alert alert-danger';
                         this.snackBar.open(message.text, 'close', {
                           duration: 2000,
+                          panelClass: ['error-snackbar']
                         });
                         break;
                 }

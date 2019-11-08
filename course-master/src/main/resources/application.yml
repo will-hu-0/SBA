@@ -60,6 +60,9 @@ spring:
     url: jdbc:mysql://sba-course-db:3306/sba_course?useSSL=true&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
+spring.jpa:
+  show-sql: true
+  hibernate.ddl-auto: update
 server:
   servlet:
     context-path: /course

@@ -22,7 +22,7 @@
           <mat-grid-list cols="2" rows="3" rowHeight="30px">
               <mat-grid-tile colspan=1 rowspan=1>
                   <div class="text-inside-grid">
-                <span class="label">Start Date: </span>{{course.startDate}}
+                <span class="label">Start Date: </span>{{course.startDate | date}}
                 </div>
               </mat-grid-tile>
               <mat-grid-tile>
@@ -32,12 +32,12 @@
                 </mat-grid-tile>
                 <mat-grid-tile colspan=1 rowspan=1>
                     <div class="text-inside-grid">
-                    <span class="label">End Date: </span>{{course.endDate}}
+                    <span class="label">End Date: </span>{{course.endDate | date}}
                     </div>
                   </mat-grid-tile>
                 <mat-grid-tile>
                     <div class="text-inside-grid">
-                        <span class="label">Duration: </span>
+                        <span class="label">Duration: </span>{{course.duration}}
                         </div>
                   </mat-grid-tile>
 
@@ -56,7 +56,7 @@
                     </div>
                 </mat-grid-tile>
                 <mat-grid-tile colspan=1 rowspan=1>
-                     <div *ngIf="course.rate > 0" class="course-actions">
+                     <div class="course-actions">
                             <button mat-icon-button color="accent">
                                 <mat-icon matBadge={{course.rate}} matBadgeColor="warn" matBadgeSize="small">star</mat-icon>
                               </button>

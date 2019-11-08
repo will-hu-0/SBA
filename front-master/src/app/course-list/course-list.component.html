@@ -1,1 +1,262 @@
-<p>course-list works!</p>
+<div class="main">
+    <mat-tab-group (selectedTabChange)="selectCourseClick($event)">
+      <mat-tab label="Current Trainings">
+
+          <div *ngIf="showMentorCourse;else show_mentorcourses">
+              <mat-spinner class="spinner"></mat-spinner>
+            </div>
+
+            <ng-template #show_mentorcourses>
+                <mat-grid-list cols="3" rowHeight="3:2">
+                <mat-grid-tile colspan=1 rowspan=1 *ngFor="let mentorcourse of mentorcourses | filter:searchText">
+              <mat-card class="course-card mat-elevation-z10">
+                <mat-card-header [ngStyle]="{'background-color': getStatusColor(mentorcourse.status)}">
+                  <div mat-card-avatar
+                  [ngStyle]="{'background-image': 'url(assets/images/heroes/' + mentorcourse.id + '-thumbnail.jpg)', 'background-size':'cover'}"></div>
+                  <mat-card-title><span class="label">Skill: </span>{{mentorcourse.skill}}</mat-card-title>
+                  <mat-card-subtitle><span class="label">Course Name: </span>{{ mentorcourse.name }}</mat-card-subtitle>
+                  <span class="mat-header-spacer"></span>
+                  <span class="rotate">{{mentorcourse.status}}</span>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-grid-list cols="4" rows="3" rowHeight="30px">
+                        <mat-grid-tile colspan=1 rowspan=1>
+                            <div class="text-inside-grid">
+                          <span class="label">Start Date: </span>
+                          </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan=1 rowspan=1>
+                            <div class="text-inside-grid">
+                          {{mentorcourse.startDate | date}}
+                          </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan=1 rowspan=1>
+                            <div class="text-inside-grid">
+                            <span class="label">Schedule: </span>
+                            </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile>
+                              <mat-progress-bar mode="determinate" value={{mentorcourse.schedule}}></mat-progress-bar>
+                            </mat-grid-tile>
+                          <mat-grid-tile colspan=1 rowspan=1>
+                              <div class="text-inside-grid">
+                              <span class="label">End Date: </span>
+                              </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan=1 rowspan=1>
+                                <div class="text-inside-grid">
+                                {{mentorcourse.endDate | date}}
+                                </div>
+                              </mat-grid-tile>
+                          <mat-grid-tile>
+                              <div class="text-inside-grid">
+                                  <span class="label">Duration: </span>
+                                  </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="text-inside-grid">
+                                    {{mentorcourse.duration}}
+                                    </div>
+                              </mat-grid-tile>
+
+                            <mat-grid-tile colspan=1 rowspan=1>
+                                <div class="text-inside-grid">
+                                <span class="label">Description: </span>
+                              </div>
+                              </mat-grid-tile>
+                              <mat-grid-tile colspan=3 rowspan=1>
+                                  <div class="text-inside-grid">
+                                  {{mentorcourse.description}}
+                                </div>
+                                </mat-grid-tile>
+                      </mat-grid-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <mat-grid-list cols="3" rows="1" rowHeight="40px">
+                        <mat-grid-tile colspan=2 rowspan=1>
+                            <div class="text-inside-grid">
+                                <span class="label">User:</span>{{ mentorcourse.userName}}
+                              </div>
+                          </mat-grid-tile>
+                      </mat-grid-list>
+                </mat-card-actions>
+              </mat-card>
+            </mat-grid-tile>
+            </mat-grid-list>
+            </ng-template>
+         </mat-tab>
+      <mat-tab label="Completed Trainnings">
+          <div *ngIf="showCompletedMentorCourse;else showcompletementorss">
+              <mat-spinner class="spinner"></mat-spinner>
+            </div>
+
+            <ng-template #showcompletementorss>
+                <mat-grid-list cols="3" rowHeight="3:2">
+                <mat-grid-tile colspan=1 rowspan=1 *ngFor="let mentorcompletedcourse of mentorcompletedcourses | filter:searchText">
+              <mat-card class="course-card mat-elevation-z10">
+                <mat-card-header>
+                  <div mat-card-avatar
+                  [ngStyle]="{'background-image': 'url(assets/images/heroes/' + mentorcompletedcourse.id + '-thumbnail.jpg)', 'background-size':'cover'}"></div>
+                  <mat-card-title><span class="label">Skill: </span>{{mentorcompletedcourse.skill}}</mat-card-title>
+                  <mat-card-subtitle><span class="label">Course Name: </span>{{ mentorcompletedcourse.name }}</mat-card-subtitle>
+                  <span class="mat-header-spacer"></span>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-grid-list cols="4" rows="3" rowHeight="30px">
+                        <mat-grid-tile colspan=1 rowspan=1>
+                            <div class="text-inside-grid">
+                          <span class="label">Start Date: </span>
+                          </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan=1 rowspan=1>
+                            <div class="text-inside-grid">
+                          {{mentorcompletedcourse.startDate | date}}
+                          </div>
+                        </mat-grid-tile>
+                          <mat-grid-tile colspan=1 rowspan=1>
+                              <div class="text-inside-grid">
+                              <span class="label">End Date: </span>
+                              </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan=1 rowspan=1>
+                                <div class="text-inside-grid">
+                               {{mentorcompletedcourse.endDate | date}}
+                                </div>
+                              </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="text-inside-grid">
+                                <span class="label">Cost: </span>
+                                </div>
+                              </mat-grid-tile>
+                              <mat-grid-tile>
+                                  <div class="text-inside-grid">
+                                  <span>$</span>{{mentorcompletedcourse.cost}}
+                                  </div>
+                                </mat-grid-tile>
+                          <mat-grid-tile>
+                              <div class="text-inside-grid">
+                                  <span class="label">Duration: </span>
+                                  </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="text-inside-grid">
+                                    {{mentorcompletedcourse.duration}}
+                                    </div>
+                              </mat-grid-tile>
+
+                            <mat-grid-tile colspan=1 rowspan=1>
+                                <div class="text-inside-grid">
+                                <span class="label">Description: </span>
+                              </div>
+                              </mat-grid-tile>
+                              <mat-grid-tile colspan=3 rowspan=1>
+                                  <div class="text-inside-grid">
+                                  {{mentorcompletedcourse.description}}
+                                </div>
+                                </mat-grid-tile>
+                      </mat-grid-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <mat-grid-list cols="3" rows="1" rowHeight="40px">
+                        <mat-grid-tile colspan=2 rowspan=1>
+                            <div class="text-inside-grid">
+                                <span class="label">User:</span>{{ mentorcompletedcourse.userName}}
+                              </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile colspan=1 rowspan=1>
+                               <div class="course-actions">
+                                      <button mat-icon-button color="accent">
+                                          <mat-icon matBadge={{mentorcompletedcourse.rate}} matBadgeColor="warn" matBadgeSize="small">star</mat-icon>
+                                        </button>
+                                      </div>
+                            </mat-grid-tile>
+                      </mat-grid-list>
+                </mat-card-actions>
+              </mat-card>
+            </mat-grid-tile>
+            </mat-grid-list>
+            </ng-template>
+
+
+      </mat-tab>
+      <mat-tab label="Available Courses">
+
+          <div *ngIf="showAvailableMentorCourse;else show_mentoravailablecourses">
+              <mat-spinner class="spinner"></mat-spinner>
+            </div>
+
+            <ng-template #show_mentoravailablecourses>
+                <mat-grid-list cols="3" rowHeight="3:2">
+                <mat-grid-tile colspan=1 rowspan=1 *ngFor="let mentoravailablecourse of mentoravailablecourses | filter:searchText">
+              <mat-card class="course-card mat-elevation-z10">
+                <mat-card-header [ngStyle]="{'background-color': getStatusColor(mentoravailablecourse.status)}">
+                  <div mat-card-avatar
+                  [ngStyle]="{'background-image': 'url(assets/images/heroes/' + mentoravailablecourse.id + '-thumbnail.jpg)', 'background-size':'cover'}"></div>
+                  <mat-card-title><span class="label">Skill: </span>{{mentoravailablecourse.skill}}</mat-card-title>
+                  <mat-card-subtitle><span class="label">Course Name: </span>{{ mentoravailablecourse.name }}</mat-card-subtitle>
+                  <span class="mat-header-spacer"></span>
+                  <div class="rotate"><span>{{mentoravailablecourse.status}}</span></div>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-grid-list cols="4" rows="3" rowHeight="30px">
+                        <mat-grid-tile colspan=1 rowspan=1>
+                            <div class="text-inside-grid">
+                          <span class="label">Start Date: </span>
+                          </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan=1 rowspan=1>
+                            <div class="text-inside-grid">
+                          {{mentoravailablecourse.startDate | date}}
+                          </div>
+                        </mat-grid-tile>
+                          <mat-grid-tile colspan=1 rowspan=1>
+                              <div class="text-inside-grid">
+                              <span class="label">End Date: </span>
+                              </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan=1 rowspan=1>
+                                <div class="text-inside-grid">
+                                {{mentoravailablecourse.endDate | date}}
+                                </div>
+                              </mat-grid-tile>
+                          <mat-grid-tile>
+                              <div class="text-inside-grid">
+                                  <span class="label">Duration: </span>
+                                  </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="text-inside-grid">
+                                    {{mentoravailablecourse.duration}}
+                                    </div>
+                              </mat-grid-tile>
+                              <mat-grid-tile colspan=2 rowspan=1>
+                                </mat-grid-tile>
+
+                            <mat-grid-tile colspan=1 rowspan=1>
+                                <div class="text-inside-grid">
+                                <span class="label">Description: </span>
+                              </div>
+                              </mat-grid-tile>
+                              <mat-grid-tile colspan=3 rowspan=1>
+                                  <div class="text-inside-grid">
+                                  {{mentoravailablecourse.description}}
+                                </div>
+                                </mat-grid-tile>
+                      </mat-grid-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <mat-grid-list cols="1" rows="1" rowHeight="40px">
+                        <mat-grid-tile>
+                          <mat-icon>edit</mat-icon>
+                          </mat-grid-tile>
+                      </mat-grid-list>
+                </mat-card-actions>
+              </mat-card>
+            </mat-grid-tile>
+            </mat-grid-list>
+            </ng-template>
+
+         </mat-tab>
+    </mat-tab-group>
+    </div>
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER='sba-account-mysql'
+CONTAINER='sba-account-db'
 
 startUpContainer () {
   docker run -d --name $CONTAINER \
@@ -8,6 +8,7 @@ startUpContainer () {
     -e MYSQL_DATABASE=sba_account \
     -e MYSQL_ROOT_PASSWORD=123456 \
     -p 32001:3306 \
+    --network sba \
     --network-alias $CONTAINER  \
     mysql:5.7 \
     --character-set-server=utf8 \

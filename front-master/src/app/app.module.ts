@@ -33,6 +33,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -69,9 +71,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     Ng2SearchPipeModule,
     MatTabsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressBarModule
   ],
-  providers: [MatDatepickerModule,
+  providers: [MatDatepickerModule, DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],

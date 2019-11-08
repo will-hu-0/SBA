@@ -33,3 +33,42 @@
 .action-spacer {
   flex: 1 1 auto;
 }
+
+.mat-card-inprogress-header {
+  /* background-color:green !important; */
+  width: 100%;
+  background: linear-gradient(40deg, white 85%, transparent 30%);
+}
+
+.rotate {
+  -moz-transform: rotate(40deg); /* Firefox */
+  -webkit-transform:rotate(40deg); /* Safari & Chrome */
+  -ms-transform:rotate(90deg); /* IE 9 */
+  -o-transform:rotate(90deg); /* Opera */
+  float: left;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  }
+
+.mat-progress-bar {
+  height: 15px;
+}
+/* .progress {
+  position: relative;
+  height: 15px;
+  display: block;
+  width: 100%;
+  background-color: #acece6;
+  border-radius: 2px;
+  background-clip: padding-box;
+  margin: 0.5rem 0 1rem 0;
+  overflow: hidden;
+  }
+.progress .determinate {
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  bottom: 0;
+  background-color: #26a69a;
+  transition: width .3s linear;
+  } */

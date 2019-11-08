@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NewCourse } from '../models/newCourse';
 import { NewRate } from '../models/newRate';
 import { environment } from '../../environments/environment';
+import { BookCourse } from '../models/bookCourse';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +30,27 @@ export class CourseService {
   }
 
 
-  bookCourses(id: number, username: string, mentorname: string) {
-    return this.http.get(`${environment.gatewayurl}/course/api/v1/mentor/book?id=${id}&username=${username}&mentorname=${mentorname}`);
+  bookCourses(bookcourse: BookCourse) {
+    return this.http.post(`${environment.gatewayurl}/course/api/v1/mentor/book`, bookcourse);
   }
 
   findUserCourses(progress: number, username: string) {
     return this.http.get(`${environment.gatewayurl}/course/api/v1/user/list?progress=${progress}&username=${username}`);
   }
 
+  findUserCompletedCourses(username: string) {
+    return this.http.get(`${environment.gatewayurl}/course/api/v1/user/listdone?&username=${username}`);
+  }
+
+  findMentorCourses(progress: number, mentorname: string) {
+    return this.http.get(`${environment.gatewayurl}/course/api/v1/listcourse?progress=${progress}&mentorname=${mentorname}`);
+  }
+
+  findMentorAvailableCourses(mentorname: string) {
+    return this.http.get(`${environment.gatewayurl}/course/api/v1/listavailablecourse?mentorname=${mentorname}`);
+  }
+
+  findMentorCompletedCourses(mentorname: string) {
+    return this.http.get(`${environment.gatewayurl}/course/api/v1/mentor/listdone?mentorname=${mentorname}`);
+  }
 }

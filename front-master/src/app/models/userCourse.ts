@@ -1,12 +1,13 @@
-export interface Course {
+export interface UserCourse {
   id: number;
   name: string;
   mentorName: string;
   skill: string;
   startDate: Date;
   endDate: Date;
+  schedule: number;
   fee: number;
-  rate: number;
+  cost: number;
   description: string;
   duration: number;
 }
