@@ -32,4 +32,8 @@ public class Course {
   private String status;
   @Column(name = "user_name")
   private String userName;
+  @Column(name = "duration")
+  private Integer duration;
+  @Column(name = "schedule")
+  private Integer schedule;
 }

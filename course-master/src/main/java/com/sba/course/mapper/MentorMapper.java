@@ -2,6 +2,7 @@ package com.sba.course.mapper;
 
 import java.util.List;
 
+import com.sba.course.model.CourseMentor;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -27,4 +28,12 @@ public interface MentorMapper {
 	@Update("update sba_course.course set user_name=#{username},progress=1 where id = #{id}")
 	void bookCourse(@Param("username") String username, @Param("id") Integer id);
 
+	@Select("SELECT a.id,a.name,a.user_name as userName ,a.skill,a.start_date as startDate,a.end_date as endDate, " +
+			"DATEDIFF(a.end_date, a.start_date) as duration,a.fee as cost, " +
+			"coalesce(b.rating, 0) as rate, a.description " +
+			"FROM sba_course.course a  left join " +
+				"(SELECT course_id, round(avg(rating)) as rating " +
+			"FROM sba_course.rate group by course_id) b on a.id =b.course_id" +
+			" where a.status='completed' and a. mentor_name=#{mentorname}")
+	List<CourseMentor> findCompeletedMentors(@Param("mentorname") String mentorname);
 }

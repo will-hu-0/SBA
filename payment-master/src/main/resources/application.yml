@@ -57,7 +57,7 @@ spring:
     name: sba-payment
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://sba-payment-mysql:3306/sba_payment?useSSL=true
+    url: jdbc:mysql://sba-payment-db:3306/sba_payment?useSSL=true
     username: root
     password: 123456
 spring.jpa:

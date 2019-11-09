@@ -2,14 +2,12 @@ package com.sba.course.controller;
 
 import java.util.List;
 
+import com.sba.course.model.CourseMentor;
 import com.sba.course.model.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sba.course.client.PaymentClient;
 import com.sba.course.mapper.MentorMapper;
@@ -61,16 +59,17 @@ public class SbaMentorController {
     }
   }
 
-  @RequestMapping(value = "/book", method = RequestMethod.GET, produces = "application/json")
-  public ResponseEntity<RestResponse> bookCourses(@RequestParam String username,
-                                              @RequestParam Integer id,
-                                              @RequestParam String mentorname) {
+  @RequestMapping(value = "/book", method = RequestMethod.POST, produces = "application/json")
+  public ResponseEntity<RestResponse> bookCourses(@RequestBody Payment bookcourse) {
     try {
-      mentorcoursemapper.bookCourse(username, id);
+      mentorcoursemapper.bookCourse(bookcourse.getUserName(), bookcourse.getCourseId());
       Payment payment = new Payment();
-      payment.setCourseId(id);
-      payment.setUserName(username);
-      payment.setMentorName(mentorname);
+      payment.setCourseId(bookcourse.getCourseId());
+      payment.setUserName(bookcourse.getUserName());
+      payment.setMentorName(bookcourse.getMentorName());
+      payment.setStartDate(bookcourse.getStartDate());
+      payment.setEndDate(bookcourse.getEndDate());
+      payment.setFee(bookcourse.getFee());
 
       paymentclient.addPayment(payment);
 
@@ -82,4 +81,20 @@ public class SbaMentorController {
     }
   }
 
+  @RequestMapping(value = "/listdone", method = RequestMethod.GET, produces = "application/json")
+  public ResponseEntity<RestResponse> findCompletedMentors(@RequestParam String mentorname) {
+    try {
+      List<CourseMentor> coursementors = mentorcoursemapper.findCompeletedMentors(mentorname);
+      if (coursementors.size() > 0) {
+        RestResponse rsp = new RestResponse(200, "Found Courses", coursementors);
+        return new ResponseEntity<>(rsp, HttpStatus.OK);
+      } else {
+        RestResponse rsp = new RestResponse(404, "No Found Courses");
+        return new ResponseEntity<>(rsp, HttpStatus.OK);
+      }
+    } catch (Exception ex) {
+      RestResponse rsp = new RestResponse(500, ex.getMessage());
+      return new ResponseEntity<>(rsp, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

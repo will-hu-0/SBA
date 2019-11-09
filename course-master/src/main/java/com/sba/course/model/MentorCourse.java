@@ -15,4 +15,5 @@ public class MentorCourse {
   private String mentorName;
   private Float fee;
   private Integer rate;
+  private Integer duration;
 }
